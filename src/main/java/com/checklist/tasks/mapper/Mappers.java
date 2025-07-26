@@ -17,19 +17,19 @@ public class Mappers {
         this.mapperService = mapperService;
     }
 
-    public TaskDto toDto(Task task) {
+    public TaskDto toDtoTask(Task task) {
         return mapperService.map(task, TaskDto.class);
     }
 
-    public Task toEntity(TaskDto dto) {
+    public Task toEntityTask(TaskDto dto) {
         return mapperService.map(dto, Task.class);
     }
 
-    public UserDto toDto(User user) {
+    public UserDto toDtoUser(User user) {
         return mapperService.map(user, UserDto.class);
     }
 
-    public User toEntity(UserDto dto) {
+    public User toEntityUser(UserDto dto) {
         return mapperService.map(dto, User.class);
     }
 }
