@@ -12,6 +12,7 @@ public class Task {
     @Id
     private String id;
     private String title;
+    private String description;
     private String userId;
     private boolean validated = false;
 }
