@@ -1,6 +1,8 @@
 package com.checklist.tasks.controller;
 
+import com.checklist.tasks.dto.request.LoginDto;
 import com.checklist.tasks.dto.request.UserDto;
+import com.checklist.tasks.dto.response.TokenDto;
 import com.checklist.tasks.model.User;
 import com.checklist.tasks.service.UserService;
 import jakarta.validation.Valid;
@@ -25,5 +27,11 @@ public class UserController {
     public ResponseEntity<Void> register(@Valid @RequestBody UserDto dto) {
         userService.save(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenDto> login(@RequestBody LoginDto loginDto) {
+        TokenDto token = userService.login(loginDto);
+        return ResponseEntity.ok(token);
     }
 }
