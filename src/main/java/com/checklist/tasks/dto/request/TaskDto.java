@@ -13,5 +13,4 @@ public class TaskDto {
     @NotBlank(message = "O titulo da tarefa é obrigatório.")
     private String title;
     private String description;
-    private String userId;
 }
