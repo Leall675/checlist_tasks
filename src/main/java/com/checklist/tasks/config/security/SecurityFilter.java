@@ -31,17 +31,21 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = this.recoverToken(request);
-        String subject = tokenService.validateToken(token);
         if (token != null) {
-            var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+            String subject = tokenService.validateToken(token);
             if (subject != null) {
                 User user = userRepository.findByEmail(subject);
                 if (user != null) {
+                    var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
                     var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    System.out.println("Usuário autenticado: " + user.getEmail());
+
                 }
             }
         }
+        System.out.println(">>> Filtro chamado! Token: " + token);
+
 
         filterChain.doFilter(request, response);
     }

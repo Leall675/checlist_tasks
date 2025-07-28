@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Service
@@ -36,17 +37,20 @@ public class TokenService {
     }
 
     private Instant generateExpirationDate() {
-        return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.from(ZoneOffset.UTC));
+        return Instant.now().plus(1, ChronoUnit.HOURS);
     }
 
     public String validateToken(String token) {
         try {
-            return JWT.require(getAlgorithm())
+            String subject = JWT.require(getAlgorithm())
                     .withIssuer("tasks")
                     .build()
                     .verify(token)
                     .getSubject();
+            System.out.println("Token validado, sujeito: " + subject);
+            return subject;
         } catch (JWTVerificationException exception) {
+            System.out.println("Token inválido: " + exception.getMessage());
             return null;
         }
     }
