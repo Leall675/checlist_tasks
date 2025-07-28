@@ -1,6 +1,5 @@
 package com.checklist.tasks.service;
 
-import com.checklist.tasks.config.JwtUtils;
 import com.checklist.tasks.config.security.TokenService;
 import com.checklist.tasks.dto.request.LoginDto;
 import com.checklist.tasks.dto.request.UserDto;
@@ -45,7 +44,7 @@ public class UserService {
         }
 
         String token = tokenService.generateToken(user);
-        return new TokenDto("Bearer " + token);
+        return new TokenDto(token);
     }
 
 
