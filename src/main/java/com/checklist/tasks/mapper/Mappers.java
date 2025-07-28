@@ -1,6 +1,7 @@
 package com.checklist.tasks.mapper;
 
 
+import com.checklist.tasks.dto.message.TaskMessageDto;
 import com.checklist.tasks.dto.request.TaskDto;
 import com.checklist.tasks.dto.request.UserDto;
 import com.checklist.tasks.model.Task;
@@ -31,5 +32,9 @@ public class Mappers {
 
     public User toEntityUser(UserDto dto) {
         return mapperService.map(dto, User.class);
+    }
+
+    public TaskMessageDto toMessageDto(Task task) {
+        return mapperService.map(task, TaskMessageDto.class);
     }
 }
